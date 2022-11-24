@@ -1,5 +1,7 @@
 from gmtrade.api import *
 from constants import API_TOKEN
+from tu_data import *
+import os, time
 
 #初始化接口
 def init():
@@ -58,22 +60,60 @@ def order(symbol, volume, side, order_type, order_price, order_effect):
     
     return result
 
+#格式代码
+def breaker():
+    print("\n" + '-'*25 + "\n")
+
 # 测试代码
 if __name__ == "__main__":
+    #初始化
     init()
-    # print(balance())
-    # print(positions())
     
-    status = start()
-    if status == 0:
-        print('连接交易服务成功.................')
-    else:
-        print('接交易服务失败.................')
-        stop()
+    #模拟盘交易服务
+        # status = start()
+        # if status == 0:
+        #     print('连接交易服务成功.................')
+        #     pass
+        # else:
+        #     print('接交易服务失败.................')
+        #     stop()
 
-    #交易逻辑----------------------------------------------------
+    #行情 & 交易
     
+    #行情示例 - 实时数据
+    breaker()
+    data = live_data("600519")
+    print(data)
     
-    #交易逻辑----------------------------------------------------
+    #行情示例 - 实时数据分类
+    breaker()
+    print(data.columns.values.tolist())
+    
+    #行情示例 - 实时数据格式分割方法
+    breaker()
+    print(data[['code', 'price']])
+    
+    #行情示例 - 至多一年半历史数据
+    # breaker()
+    # print(historical_data("600519", 10))
 
-    display = input("任意字符退出")
+    breaker()
+    mode = input("任意字符退出, 1 进入循环拉取模式:\n")
+    begin = 0
+    if mode == "1":
+        os.system("cls")
+        try:
+            while True:
+                data = live_data("600519")
+                trimmed = data[['time','code','name','price','volume','bid','ask']]
+                if begin ==  0:
+                    print(trimmed.to_string(index=False))
+                    begin = 1
+                else:
+                    print(trimmed.to_string(index=False, header=False))
+
+                # 不要删除！避免TOKEN被禁用
+                time.sleep(0.5)
+        except KeyboardInterrupt:
+            print("Quiting...")
+            quit()
