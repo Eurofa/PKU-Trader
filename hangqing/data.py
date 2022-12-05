@@ -26,47 +26,46 @@ if __name__ == "__main__":
     breaker()
     df = historical_data("600519", 0)
     df.index = pd.to_datetime(df.index)
-    # print(df)
     
-    # 数据获取演示 ------------------------------
+    # 数据获取演示 -------------------------------------
     
-    # 日期切割示例 - 仅过去一年
+    #日期切割示例 - 仅过去一年
     # print("\n日期切割")
-    df = df['2021':'2022']
+    # df = df['2021':'2022']
     
-    # 若开盘价高于收盘价 3%
+    # 若开盘价高于前收盘价 3%
     print("\n条件: 开盘价高于收盘价 3%")
     op3cl = df.loc[(df["open"] - df["close"].shift(-1))/df["close"].shift(-1) > 0.03]
     
-    if op3cl.empty:
-        print("\n没有匹配的结果\n")
-    else:
-        print(op3cl)
+    # if op3cl.empty:
+    #     print("\n没有匹配的结果\n")
+    # else:
+    #     print(op3cl)
     
     # 若收盘价高于开盘价
     print("\n条件: 收盘价高于开盘价 5%")
     cl5op = df.loc[(df['close'] - df['open'])/df['open'] > 0.05]
     
-    if cl5op.empty:
-        print("\n没有匹配的结果\n")
-    else:
-        print(cl5op)
+    # if cl5op.empty:
+    #     print("\n没有匹配的结果\n")
+    # else:
+    #     print(cl5op)
         
     # 若收盘价低于于开盘价
     print("\n条件: 收盘价低于开盘价 5%")
     cln5op = df.loc[(df['close'] - df['open'])/df['open'] < -0.05]
     
-    if cln5op.empty:
-        print("\n没有匹配的结果\n")
-    else:
-        print(cln5op)
+    # if cln5op.empty:
+    #     print("\n没有匹配的结果\n")
+    # else:
+    #     print(cln5op)
 
     # 简单超买策略回测演示
     print("\n策略: 若收盘价高于开盘价 5% 则融券卖出")
     print("规则: 以收盘价格卖出, 第二个交易日收盘买回\n")
     
     breaker()
-    print("回测开始 ($1,000,000, No Leverage, No TP/SL)")
+    print("简单超买策略回测开始 ($1,000,000, No Leverage, No TP/SL)")
     breaker()
     
     trigger_dates = cl5op.index.tolist()
@@ -104,7 +103,7 @@ if __name__ == "__main__":
     print("规则: 以收盘价格买入, 第二个交易日收盘卖出\n")
     
     breaker()
-    print("回测开始 ($1,000,000, No Leverage, No TP/SL)")
+    print("简单超卖策略回测开始 ($1,000,000, No Leverage, No TP/SL)")
     breaker()
     
     trigger_dates = cln5op.index.tolist()

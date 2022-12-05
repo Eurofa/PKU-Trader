@@ -1,5 +1,6 @@
 from gmtrade.api import *
 from hangqing.constants import API_TOKEN, breaker
+from hangqing.tu_data import *
 
 #交易接口初始化
 def init():
