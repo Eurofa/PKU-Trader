@@ -18,7 +18,8 @@
 注：由于MYQUANT不提供行情API，行情另外从Tushare拉取（免费版有限制）
 
 
-## 行情数据细节
+## 实时行情数据格式
+    0：namme 股票名称
     1：open，今日开盘价 
     2：pre_close，昨日收盘价 
     3：price，当前价格
@@ -30,14 +31,14 @@
     9：amount，成交金额 
     10：b1_v，买一 volume
     11：b1_p，买一 price 
-    12：b2_v，“买二” volume
-    13：b2_p，“买二” price
-    14：b3_v，“买三” volume
-    15：b3_p，“买三” price
-    16：b4_v，“买四” volume
-    17：b4_p，“买四” price
-    18：b5_v，“买五” volume
-    19：b5_p，“买五” price
+    12：b2_v，买二 volume
+    13：b2_p，买二 price
+    14：b3_v，买三 volume
+    15：b3_p，买三 price
+    16：b4_v，买四 volume
+    17：b4_p，买四 price
+    18：b5_v，买五 volume
+    19：b5_p，买五 price
     20：a1_v，卖一 volume
     21：a1_p，卖一 price
     22：a2v，卖2v 
@@ -45,8 +46,25 @@
     24：a3v，卖3v 
     25：a3p，卖3p 
     26：a4v，卖4v 
-    27：a4p，卖4p 
+    27：a4popen，卖4p 
     28：a5v，卖5v 
     29：a5p，卖5p 
     30：date，日期； 
     31：time，时间；
+    32：code，股票代码
+
+## 历史行情数据格式
+    1. open
+    2. high
+    3. close
+    4. low
+    5. volume
+    6. 价格变动（单位）
+    7. 价格变动（百分比）
+    8. MA5
+    9. MA10
+    10. MA20
+    11. VMA5
+    12. VMA10
+    13. VMA20
+    14. Turnover
