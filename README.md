@@ -1,5 +1,3 @@
-第一次使用前需运行 pip install gmtrade
-
 本项目通过MYQUANT进行模拟交易，支持的交易所：
     上交所，市场代码 SHSE
     深交所，市场代码 SZSE
