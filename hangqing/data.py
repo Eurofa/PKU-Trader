@@ -7,23 +7,26 @@ import os, time
 if __name__ == "__main__":
     
     #示例 - 实时数据
-    breaker()
-    data = live_data("600519", 1)
-    print(data.to_string(index = False))
+        # breaker()
+        # data = live_data("600519", 1)
+        # print(data.to_string(index = False))
     
     #示例 - 数据分割方法
-    # breaker()
-    # print(data[['code', 'price']])
+        # breaker()
+        # print(data[['code', 'price']])
     
     #示例 - 历史数据(至多一年半)
-    # breaker()
-    # print(historical_data("600519", 10))
-
-
     breaker()
-    mode = 0
+    print(historical_data("600519", 10))
+    
+    breaker()
+    data = historical_tick("600519", "2022-11-23")
+    print(data)
+
+    # breaker()
     # mode = input("任意字符退出, 1 进入循环拉取模式:\n")
-    begin = 0
+    # begin = 0
+    mode = 0
     
     if mode == "1":
         os.system("cls")

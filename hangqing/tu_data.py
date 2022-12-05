@@ -36,9 +36,12 @@ def historical_data(symbol, limit=0):
     
 # 历史（单日）逐笔成交数据
 def historical_tick(symbol, date, limit=0):
-    data = ts.get_tick_data(symbol)
+    data = ts.get_tick_data(symbol, date=date)
     
-    if limit == 0:
-        return data
+    if data == None:
+        return "权限错误，Tick数据需要付费Tushare Pro接口\n"
     else:
-        return data.head(limit)
+        if limit == 0:
+            return data
+        else:
+            return data.head(limit)
