@@ -25,9 +25,12 @@ def live_data(symbol, depth=1):
     return raw[base_data + depth_list]
 
 # 历史日频数据
+# 此数据已是以日期为时间序列index的格式
 def historical_data(symbol, limit=0):
     
-    data = ts.get_hist_data(symbol)
+    data = ts.get_hist_data(symbol, ktype="D")
+    
+    data = data[['open', 'high', 'close', 'low', 'volume', 'ma5', 'ma10', 'ma20', 'v_ma5', 'v_ma10','v_ma20']]
     
     if limit == 0:
         return data
@@ -45,3 +48,8 @@ def historical_tick(symbol, date, limit=0):
             return data
         else:
             return data.head(limit)
+
+# 旧版接口，可支持至多20年数据   
+def historical_k_data(symbol: str, start_date: str):    
+    data = ts.get_k_data(symbol, start=start_date)
+    return data

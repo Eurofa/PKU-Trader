@@ -57,3 +57,27 @@ def order(symbol, volume, side, order_type, order_price, order_effect):
     result = order_volume(symbol=symbol, volume=volume, side=side, order_type=order_type, position_effect=order_effect, price=order_price)
     
     return result
+
+
+# mode = input("任意字符退出, 1 进入循环拉取模式:\n")
+# begin = 0
+
+# if mode == "1":
+#     os.system("cls")
+#     try:
+#         while True:
+#             data = live_data("600519", 1)
+        
+#             # 输出格式化
+#             if begin ==  0:
+#                 print(data.to_string(index=False))
+#                 begin = 1
+#             else:
+#                 print(data.to_string(index=False, header=False))
+
+#             # 不要删除！避免TOKEN被禁用
+#             time.sleep(0.5)
+            
+#     except KeyboardInterrupt:
+#         print("正在退出...")
+#         quit()
