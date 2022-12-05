@@ -13,7 +13,8 @@
     - 芝加哥商品期货交易所，市场代码 CBT (SOC, SBC, SMC, CRC)
     - 纽约期货交易所，市场代码 NYB (SGN)
 
-由于MYQUANT不提供行情API，行情另外从Tushare拉取（免费版有限制）
+注：由于MYQUANT不提供行情API，行情另外从Tushare拉取（免费版有限制）
+
 
 ## 行情数据细节
     1：open，今日开盘价 
@@ -23,8 +24,8 @@
     5：low，今日最低价 
     6：bid，竞买价，即“买一”报价 
     7：ask，竞卖价，即“卖一”报价 
-    8：volumn，成交量 maybe you need do volumn/100 
-    9：amount，成交金额（元 CNY） 
+    8：volumn，成交量
+    9：amount，成交金额 
     10：b1_v，买一 volume
     11：b1_p，买一 price 
     12：b2_v，“买二” volume
