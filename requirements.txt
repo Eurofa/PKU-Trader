@@ -1,0 +1,3 @@
+gmtrader
+tushare
+pandas>=1.5.0
