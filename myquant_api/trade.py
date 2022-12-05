@@ -1,4 +1,19 @@
 from gmtrade.api import *
+from hangqing.constants import API_TOKEN, breaker
+
+#交易接口初始化
+def init():
+    #身份验证
+    set_token(API_TOKEN)
+    
+    #链接服务器
+    set_endpoint("api.myquant.cn:9000")
+
+    #登录账户
+    acc = account(account_id='ef37c766-6bbd-11ed-b621-00163e18a8b3', account_alias='PKU_Trader')
+
+    #登录
+    login(acc)
 
 #账户资金查询
 def balance():
@@ -33,7 +48,7 @@ def positions():
  
     return buffer_list
 
-#下单(无内置验证)
+#下单
 def order(symbol, volume, side, order_type, order_price, order_effect):
     # side: buy = 1, sell = 2
     # order_type: 1 = 限价委托, 2 = 市价委托, 3 = 止损止盈委托
