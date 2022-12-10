@@ -6,7 +6,7 @@ import sqlite3 as sql
 import os, time, io, math
 
 
-# 示例代码
+# 以下为行情使用示例代码 Kevin
 if __name__ == "__main__":
     
     #示例 - 实时数据

@@ -32,7 +32,6 @@ def live_data(symbol: str, depth=1) -> DataFrame:
 
     return raw[base_data + depth_list]
 
-
 def historical_data(symbol: str, limit=0) -> DataFrame:
     """历史日频数据 - 此数据已是以日期为时间序列index的格式
 
@@ -86,5 +85,6 @@ def historical_k_data(symbol: str, start_date: str) -> DataFrame:
     data = ts.get_k_data(symbol, start=start_date)
     return data
 
-data = live_data("600519", 5)
-print(data.to_string(index = False))
+# 演示代码
+# data = live_data("600519", 5)
+# print(data.to_string(index = False))

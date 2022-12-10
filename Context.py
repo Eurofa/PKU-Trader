@@ -1,8 +1,8 @@
 #策略调用的类，提供数据（行情、仓位、时间）接口、下单接口等
 import pandas as pd
+import Myquant_API as api
 from gmtrade.api import *
 from hangqing import tu_data
-from myquant_api.trade import trade_init
 import os, time
 
 def date_int_trans(datetime):
@@ -14,7 +14,7 @@ def date_int_trans(datetime):
 
 class Context:
     def __init__(self,start='2021-04-19',today=time.strftime('%Y-%m-%d'),code_list=[]):
-        trade_init() #初始化接口
+        # api.trade_init()    #初始化接口
         
         self.code_list=code_list    #策略所需的股票代码池
         self.start=start    # 策略开始时间
@@ -26,8 +26,6 @@ class Context:
         self.daysdata={}    #缓存之前的数据
         self.trading_fee_ratio=0.0005    #交易税
         self.on_init()
-        # 测试用
-        # self.code_list.append('600519')
         
     def on_init(self):
         for code in self.code_list:
@@ -48,32 +46,12 @@ class Context:
 
     #账户仓位
     def account_positions(self):
-        positions = get_positions()
-        # 数据整理
-        buffer_dict = {}
-        for item in positions:
-            buffer = dict()
-            # buffer["symbol"] = item.symbol
-            buffer["volume"] = item.volume
-            buffer['volume_today']=item.volume_today
-            buffer["price"] = item.price
-            buffer["avg"] = item.vwap
-            buffer["pnl"] = item.fpnl
-
-            # Calculate p/l percentage
-            buffer["p/l_ratio"] = item.fpnl / (item.volume * item.vwap)
-
-            buffer_dict[item.symbol]=buffer
-
-        return buffer_dict
+        return api.positions()
+    
     # 账户资金查询
     def account_balance(self):
-        cash = get_cash()
-        # 数据整理
-        buffer = dict()
-        buffer["frozen"] = cash.frozen
-        buffer["avail"] = cash.available
-        return buffer
+        return api.balance()
+    
     #账户盈亏统计
     def account_pnl(self):
         #算每个仓位的盈亏，初始调用一次，末尾调用一次。
@@ -139,6 +117,6 @@ class Context:
 
 if __name__=='__main__':
     context=Context()
-    context.today='2022-10-10'
-    df=context.get_daysdata(context.code_list[0])
-    print(df)
+    # context.today='2022-10-10'
+    # df=context.get_daysdata(context.code_list[0])
+    # print(df)
