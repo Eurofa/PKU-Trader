@@ -2,10 +2,10 @@
 
 ## 组员
 
-|姓名|负责部分|
-|--|--|
-|Kevin Miao|行情模块，交易模块|
-|陈子豪|回测模块，交易模块|
+|姓名|负责部分|用户名|
+|--|--|--|
+|Kevin Miao|行情模块，交易模块|Eurofa|
+|陈子豪|回测模块，交易模块|cheney603603|
 
 <br>
 
@@ -17,11 +17,12 @@ PKU-Trader为自行搭建的量化策略运行平台，目前实装了行情模�
 
 # 试用方法
 
-行情模块功能演示:
+行情模块试用方式:
 ```
-python ./hangqing/data_strategy_demo.py
+python ./hangqing/data.py
+python ./hangqing/trade.py
 ```
-回测模块演示：
+回测模块试用方式：
 
 ```
 python ./DtEngine.py
@@ -31,9 +32,6 @@ python ./DtEngine.py
 <br>
 
 # 模块简介
-
-## 行情模块 Tu_Data
-本模块提供了从Tushare拉取的多种数据，支持所有主流交易所。 可提供实时行情，高精度短期（一年半）历史日频，历史逐笔成交数据（由于 Tushare 服务政策改变暂不可用）以及最多20年的历史日频数据（数据源存在部分错误）
 
 ## Context模块
 本模块主要为策略运行环境和数据仓库的对接层，其中封装了与行情模块的接口，以及一些信息格式转换的方法。通过context模块，可以为策略运行创建一个独立实时的数据环境，方便未来的多进程运行设计。其中主要方法包括get_daysdata、account_pnl、account_positions，分别用来获取指定TimeRange内的日线数据，账户的profit&loss、账户仓位等。
@@ -46,9 +44,6 @@ python ./DtEngine.py
 
 ## DtAnalysis模块
 本模块主要为数据分析与格式化输出层，用于在策略运行时输出统计指标和运行相关指标，如在run_backtest中输出Pnl和胜率等相关信息并绘图。
-
-## 交易模块 Myquant_API
-本模块链接了掘金仿真的API，并针对部分功能做出优化，详解和功能演示。可支持交易费用模拟，资金查询，持仓查询，模拟盘实时下单等功能。
 
 <br>
 
