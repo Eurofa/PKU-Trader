@@ -21,8 +21,7 @@ python ./hangqing/trade.py
 回测模块试用：
 
 ```
-cd ./Demo
-python ./BT_arima.py
+python ./DtEngine.py
 ```
 最后会将结果以xlsx的形式输出至bt_results文件夹下
 
