@@ -7,6 +7,28 @@
 |Kevin Miao|行情模块，交易模块|
 |陈子豪|回测模块，交易模块|
 
+# Introduction
+
+PKU-Trader为自行搭建的量化策略运行平台，目前主要实装了行情模块、回测模块和交易模块。
+
+# Usage
+
+行情模块试用:
+```
+python ./hangqing/data.py
+python ./hangqing/trade.py
+```
+回测模块试用：
+
+```
+cd ./Demo
+python ./BT_arima.py
+```
+最后会将结果以xlsx的形式输出至bt_results文件夹下
+
+
+# Appendix
+
 ---
 ## 交易所支持
 本项目通过MYQUANT进行模拟交易，支持的交易所包括：
@@ -80,13 +102,17 @@
 
 ---
 ## Context模块
-（周五写）
+本模块主要为策略运行环境和数据仓库的对接层，其中封装了与行情模块的接口，以及一些信息格式转换的方法。通过context模块，可以为策略运行创建一个独立实时的数据环境，方便未来的多进程运行设计。其中主要方法包括get_daysdata、account_pnl、account_positions，分别用来获取指定TimeRange内的日线数据，账户的profit&loss、账户仓位等。
 
 ---
 ## Strategy模块
+本模块主要为策略基本类，内有生成交易信号的on_bar方法，主职计算与预测的on_caculate方法，由于之前未获得tick级别数据，故on_tick，select_code模块暂未在测试模型中启用，但基本模块中包含。
 
 ---
 ## Dtengine模块
+本模块主要为量化运行的总数据环境管理，通过Dtengine模块，我们可以将多个策略放在不同的context上组合运行，目前这块主要完成了回测功能，即run_backtest部分。
 
 ---
 ## DtAnalysis模块
+本模块主要为数据分析与格式化输出层，用于在策略运行时输出统计指标和运行相关指标，如在run_backtest中输出Pnl和胜率等相关信息并绘图。
+
