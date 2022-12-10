@@ -23,10 +23,10 @@ def live_data(symbol: str, depth=1) -> DataFrame:
     for i in range(1, depth+1):
         bid = 'b'
         ask = 'a'
-        depth_list.append(bid+str(depth)+'_p')
-        depth_list.append(bid+str(depth)+'_v')
-        depth_list.append(ask+str(depth)+'_p')
-        depth_list.append(ask+str(depth)+'_v')
+        depth_list.append(bid+str(i)+'_p')
+        depth_list.append(bid+str(i)+'_v')
+        depth_list.append(ask+str(i)+'_p')
+        depth_list.append(ask+str(i)+'_v')
     
     base_data = ['code', 'time', 'price', 'high', 'low', 'bid', 'ask', 'volume']
 
@@ -85,3 +85,6 @@ def historical_k_data(symbol: str, start_date: str) -> DataFrame:
     """
     data = ts.get_k_data(symbol, start=start_date)
     return data
+
+data = live_data("600519", 5)
+print(data.to_string(index = False))

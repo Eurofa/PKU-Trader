@@ -2,22 +2,8 @@
 import pandas as pd
 from gmtrade.api import *
 from hangqing import tu_data
+from myquant_api.trade import trade_init
 import os, time
-API_TOKEN = "e2faec93d69c35b1a9d348ca46fcf38726370474"
-
-# 初始化接口
-def account_init():
-    # 身份验证
-    set_token(API_TOKEN)
-
-    # 链接服务器
-    set_endpoint("api.myquant.cn:9000")
-
-    # 登录账户
-    acc = account(account_id='ef37c766-6bbd-11ed-b621-00163e18a8b3', account_alias='PKU_Trader')
-
-    # 登录
-    login(acc)
 
 def date_int_trans(datetime):
     if isinstance(datetime,str):
@@ -28,22 +14,25 @@ def date_int_trans(datetime):
 
 class Context:
     def __init__(self,start='2021-04-19',today=time.strftime('%Y-%m-%d'),code_list=[]):
-        account_init()
-        self.code_list=code_list#策略所需的股票代码池
+        trade_init() #初始化接口
+        
+        self.code_list=code_list    #策略所需的股票代码池
         self.start=start    # 策略开始时间
         self.today=today    # 默认取本地当前时间
-        self.positions = {}
-        self.balance={'frozen':0,'avail':0}
+        
+        self.positions = {}    # 持仓
+        self.balance={'frozen':0,'avail':0}    # 余额
         self.pnl=0
-        self.daysdata={}#缓存之前的数据
-        self.trading_fee_ratio=0.0005#交易税
+        self.daysdata={}    #缓存之前的数据
+        self.trading_fee_ratio=0.0005    #交易税
         self.on_init()
-        # self.balance=self.account_balance()
         # 测试用
         # self.code_list.append('600519')
+        
     def on_init(self):
         for code in self.code_list:
             self.daysdata[code]=pd.DataFrame()
+            
     #更新实时账户数据
     def update_data(self):
         self.positions=self.account_positions()

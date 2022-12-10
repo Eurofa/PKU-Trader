@@ -6,21 +6,21 @@ import sqlite3 as sql
 import os, time, io, math
 
 
-# 测试代码
+# 示例代码
 if __name__ == "__main__":
     
     #示例 - 实时数据
-        # breaker()
-        # data = live_data("600519", 1)
-        # print(data.to_string(index = False))
+    breaker()
+    data = live_data("600519", 1)
+    print(data.to_string(index = False))
     
     #示例 - 数据分割方法
-        # breaker()
-        # print(data[['code', 'price']])
+    breaker()
+    print(data[['code', 'price']])
         
     #示例 - 历史数据(至多一年半)
-        # breaker()
-        # print(historical_k_data("600519", "2020-1-1"))
+    breaker()
+    print(historical_k_data("600519", "2020-1-1"))
     
     #示例 - 历史数据(日线至多一年半，小时数据最多350个历史小时)
     breaker()
@@ -37,28 +37,28 @@ if __name__ == "__main__":
     print("\n条件: 开盘价高于收盘价 3%")
     op3cl = df.loc[(df["open"] - df["close"].shift(-1))/df["close"].shift(-1) > 0.03]
     
-    # if op3cl.empty:
-    #     print("\n没有匹配的结果\n")
-    # else:
-    #     print(op3cl)
+    if op3cl.empty:
+        print("\n没有匹配的结果\n")
+    else:
+        print(op3cl)
     
     # 若收盘价高于开盘价
     print("\n条件: 收盘价高于开盘价 5%")
     cl5op = df.loc[(df['close'] - df['open'])/df['open'] > 0.05]
     
-    # if cl5op.empty:
-    #     print("\n没有匹配的结果\n")
-    # else:
-    #     print(cl5op)
+    if cl5op.empty:
+        print("\n没有匹配的结果\n")
+    else:
+        print(cl5op)
         
     # 若收盘价低于于开盘价
     print("\n条件: 收盘价低于开盘价 5%")
     cln5op = df.loc[(df['close'] - df['open'])/df['open'] < -0.05]
     
-    # if cln5op.empty:
-    #     print("\n没有匹配的结果\n")
-    # else:
-    #     print(cln5op)
+    if cln5op.empty:
+        print("\n没有匹配的结果\n")
+    else:
+        print(cln5op)
 
     # 简单超买策略回测演示
     print("\n策略: 若收盘价高于开盘价 5% 则融券卖出")
