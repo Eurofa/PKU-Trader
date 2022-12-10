@@ -1,4 +1,4 @@
-# PKU Trader
+# PKU Trader 简易量化交易系统
 
 ## 组员
 
